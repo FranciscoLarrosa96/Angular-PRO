@@ -14,9 +14,16 @@ export class CalculatorButtonComponent  {
     transform: (value: boolean | string) =>
       typeof value === 'string' ? value === '' : value,
   });
+  public isDoubleSize = input(false, {
+    transform: (value: boolean | string) =>
+      typeof value === 'string' ? value === '' : value,
+  });
 
-  @HostBinding('class.is-command') get commandStyle() {
-    return this.isCommand();
+  // @HostBinding('class.is-command') get commandStyle() {
+  //   return this.isCommand();
+  // }
+  @HostBinding('class.w-2/4') get commandStyle() {
+    return this.isDoubleSize();
   }
   // Con el "host" se le puede agregar estilos al componente desde el padre, en este caso se le agrega un borde a la derecha y abajo
   // en este caso le aplica a todo el componente, pero se puede aplicar a un elemento específico dentro del componente
