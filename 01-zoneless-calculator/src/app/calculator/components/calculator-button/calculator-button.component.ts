@@ -1,4 +1,4 @@
-import { Component, HostBinding, input } from '@angular/core';
+import { Component, ElementRef, HostBinding, input, output, viewChild } from '@angular/core';
 
 @Component({
   selector: 'calculator-button',
@@ -10,6 +10,12 @@ import { Component, HostBinding, input } from '@angular/core';
   }
 })
 export class CalculatorButtonComponent  {
+
+  public contentValue = viewChild<ElementRef<HTMLButtonElement>>('button');
+
+  public onClick = output<string>();
+
+
   public isCommand = input(false, {
     transform: (value: boolean | string) =>
       typeof value === 'string' ? value === '' : value,
@@ -29,5 +35,16 @@ export class CalculatorButtonComponent  {
   // en este caso le aplica a todo el componente, pero se puede aplicar a un elemento específico dentro del componente
   // Se puede usar para agregar clases de tailwind, pero no es necesario, ya que se pueden agregar directamente en el template
   // En este caso se le aplica a calcular-button
+
+  handleClick() {
+
+    if(!this.contentValue()?.nativeElement) {
+      return;
+    }
+
+    const value = this.contentValue()!.nativeElement.innerText;
+
+    this.onClick.emit(value);
+  }
 
 }
