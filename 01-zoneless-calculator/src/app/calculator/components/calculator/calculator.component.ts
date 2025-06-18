@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, viewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, viewChildren } from '@angular/core';
 import { CalculatorButtonComponent } from '../calculator-button/calculator-button.component';
 import { CommonModule } from '@angular/common';
+import { CalculatorService } from '../../services/calculator.service';
 
 @Component({
   selector: 'calculator',
@@ -14,11 +15,30 @@ import { CommonModule } from '@angular/common';
 })
 export class CalculatorComponent {
 
+  private calculatorSvc = inject(CalculatorService);
+
   /**
    * Referencia a los botones de la calculadora.
    * Se usa para poder acceder a los botones desde el componente padre.
    */
   public calculatorButtons = viewChildren(CalculatorButtonComponent);
+
+  /**
+   * Texto del resultado de la calculadora.
+   * Se usa para mostrar el resultado en la pantalla de la calculadora.
+   */
+  public resultTxt = computed(() => this.calculatorSvc.resultTxt());
+  public subResultTxt = computed(() => this.calculatorSvc.subResultTxt());
+  public lastOperator = computed(() => this.calculatorSvc.lastOperator());
+
+  // En ves de esto uso un computed signal
+  // get resultTxt() {
+  //   return this.calculatorSvc.resultTxt;
+  // }
+
+  // get subResultTxt() {
+  //   return this.calculatorSvc.subResultTxt;
+  // }
 
   /**
    * Maneja el clic en un botón de la calculadora.
