@@ -1,5 +1,7 @@
 <!-- <div class="w-1/4 border-r border-b border-indigo-400"> -->
-    <button #button [class.is-command]="isCommand()" [class.isDobubleSize]="isDoubleSize()" (click)="handleClick()">
+    <button #button [class.is-command]="isCommand()" [class.isDobubleSize]="isDoubleSize()"
+    [class.isPressed]="isPressed()" 
+    (click)="handleClick()">
         <ng-content />
     </button>
 <!-- </div> -->
