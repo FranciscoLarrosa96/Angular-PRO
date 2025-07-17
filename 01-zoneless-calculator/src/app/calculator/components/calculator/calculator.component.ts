@@ -45,7 +45,7 @@ export class CalculatorComponent {
    * @param key 
    */
   handleClick(key: string) {
-    console.log({key});
+    this.calculatorSvc.constructNumber(key);
 
   }
 
