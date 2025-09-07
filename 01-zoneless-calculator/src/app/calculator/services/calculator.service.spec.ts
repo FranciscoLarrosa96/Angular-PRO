@@ -91,4 +91,33 @@ describe('CalculatorService', () => {
         service.constructNumber('.');
         expect(service.resultTxt()).toBe('0.5.'); // No debería agregar otro punto
     });
+
+    it('should handle sign change correctly', () => {
+        service.resultTxt.set('5');
+        service.constructNumber('+/-');
+        expect(service.resultTxt()).toBe('-5');
+        service.constructNumber('+/-');
+        expect(service.resultTxt()).toBe('5');
+    });
+
+    it('should handle backspace correctly', () => {
+        service.resultTxt.set('123');
+        service.constructNumber('Backspace');
+        expect(service.resultTxt()).toBe('12');
+        service.constructNumber('Backspace');
+        expect(service.resultTxt()).toBe('1');
+        service.constructNumber('Backspace');
+        expect(service.resultTxt()).toBe('0');
+    });
+
+    it('should handle max length correctly', () => {
+        for (let i = 0; i < 10; i++) {
+            service.constructNumber('1');
+        }
+
+        expect(service.resultTxt().length).toBe(10);
+
+        service.constructNumber('1');
+        expect(service.resultTxt().length).toBe(10); // No debería agregar más dígitos
+    });
 });
