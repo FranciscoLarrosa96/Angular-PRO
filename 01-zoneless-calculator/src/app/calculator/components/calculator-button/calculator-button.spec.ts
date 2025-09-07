@@ -53,6 +53,7 @@ describe('CalculatorButtonComponent', () => {
 
         setTimeout(() => {
             expect(component.isPressed()).toBeFalse();
+            // Con el done indico a Jasmine que la prueba ha terminado
             done();
         }, 100);
     })
