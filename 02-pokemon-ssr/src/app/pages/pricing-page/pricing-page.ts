@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
@@ -12,7 +13,11 @@ export class PricingPage {
   
   private title = inject(Title);
   private meta = inject(Meta);
+  private platformId = inject(PLATFORM_ID);
   ngOnInit(): void {
+    // if(!isPlatformServer(this.platformId)){
+    //   document.title = 'Pricing - Pokémon SSR';
+    // }
     // Seteo el título de la página
     this.title.setTitle('Pricing - Pokémon SSR');
     // Seteo las metatags de la página
