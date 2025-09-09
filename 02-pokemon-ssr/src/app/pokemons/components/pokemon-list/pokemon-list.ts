@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { ApplicationRef, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { PokemonCard } from "../pokemon-card/pokemon-card";
 import { timeout } from 'rxjs/internal/operators/timeout';
 
@@ -10,9 +10,24 @@ import { timeout } from 'rxjs/internal/operators/timeout';
 })
 export class PokemonList implements OnInit {
   isLoading = signal<boolean>(true);
+  // private appRef = inject(ApplicationRef);
+
+  // private $appState = this.appRef.isStable
+  // .subscribe({
+  //   next : (isStable) => {
+  //     console.log(';isStable', isStable);
+      
+  //   }
+  // })
   ngOnInit(): void {
     setTimeout(() => {
       this.isLoading.set(false);
     }, 7000);
   }
+
+
+  // ngOnDestroy(): void {
+  //   console.log('ngOnDestroy');
+  //   this.$appState.unsubscribe();
+  // }
 }
