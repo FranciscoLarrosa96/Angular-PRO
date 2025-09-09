@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { PokemonCard } from "../pokemon-card/pokemon-card";
+import { timeout } from 'rxjs/internal/operators/timeout';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -7,6 +8,11 @@ import { PokemonCard } from "../pokemon-card/pokemon-card";
   templateUrl: './pokemon-list.html',
   styleUrl: './pokemon-list.scss'
 })
-export class PokemonList {
-
+export class PokemonList implements OnInit {
+  isLoading = signal<boolean>(true);
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 7000);
+  }
 }
