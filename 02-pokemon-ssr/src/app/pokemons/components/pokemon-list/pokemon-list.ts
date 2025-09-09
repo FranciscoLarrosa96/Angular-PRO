@@ -1,6 +1,8 @@
-import { ApplicationRef, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { ApplicationRef, Component, inject, input, OnDestroy, OnInit, signal } from '@angular/core';
 import { PokemonCard } from "../pokemon-card/pokemon-card";
 import { timeout } from 'rxjs/internal/operators/timeout';
+import { PokemonsService } from '../../services/pokemons';
+import { Pokemon } from '../../interfaces/pokemon.interface';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -9,7 +11,11 @@ import { timeout } from 'rxjs/internal/operators/timeout';
   styleUrl: './pokemon-list.scss'
 })
 export class PokemonList implements OnInit {
-  isLoading = signal<boolean>(true);
+   _pokemonsService = inject(PokemonsService);
+   public pokemonsList = input.required<Pokemon[]>();
+
+   
+
   // private appRef = inject(ApplicationRef);
 
   // private $appState = this.appRef.isStable
@@ -20,9 +26,7 @@ export class PokemonList implements OnInit {
   //   }
   // })
   ngOnInit(): void {
-    setTimeout(() => {
-      this.isLoading.set(false);
-    }, 7000);
+
   }
 
 
