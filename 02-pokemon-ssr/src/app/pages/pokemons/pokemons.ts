@@ -27,7 +27,9 @@ export class Pokemons implements OnInit {
 
 
   ngOnInit(): void {
-    this.loadPokemons();
+    if(this._pokemonsService.pokemons().length === 0){
+      this.loadPokemons();
+    }
   }
 
 
