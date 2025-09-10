@@ -10,10 +10,9 @@ import { PokeAPIResponse } from '../interfaces/pokemon-api.interface';
 export class PokemonsService {
   private _http = inject(HttpClient);
   isLoading = signal<boolean>(false);
-
+  public pokemons = signal<Pokemon[]>([]);
   public loadPokemons(page: number): Observable<Pokemon[]> {
     if (page < 0) page = 0;
-
     if (page !== 0) {
       --page;
     }
@@ -22,7 +21,6 @@ export class PokemonsService {
     return this._http.get<PokeAPIResponse>(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${page * 20}&limit=20`)
       .pipe(
         map(res => {
-          this.isLoading.set(true);
           const simplePokemons: Pokemon[] = res.results.map(poke => ({
             id: poke.url.split('/').at(-2)!,
             name: poke.name,
@@ -30,11 +28,8 @@ export class PokemonsService {
           return simplePokemons;
         }),
         tap(
-          
-        ),
-        finalize(() => {
-          this.isLoading.set(false);
-        })
+          (pokemons) => this.pokemons.set(pokemons)
+        )
       )
   }
 }

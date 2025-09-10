@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, inject, input, OnDestroy, OnInit, signal } from '@angular/core';
+import { ApplicationRef, Component, effect, inject, input, OnDestroy, OnInit, signal } from '@angular/core';
 import { PokemonCard } from "../pokemon-card/pokemon-card";
 import { timeout } from 'rxjs/internal/operators/timeout';
 import { PokemonsService } from '../../services/pokemons';
@@ -11,9 +11,13 @@ import { Pokemon } from '../../interfaces/pokemon.interface';
   styleUrl: './pokemon-list.scss'
 })
 export class PokemonList implements OnInit {
-   _pokemonsService = inject(PokemonsService);
+   private _pokemonsService = inject(PokemonsService);
+   isLoading = signal<boolean>(false);
    public pokemonsList = input.required<Pokemon[]>();
 
+   checkLoading = effect(() => {
+    this.isLoading.set(this._pokemonsService.isLoading());
+   });
    
 
   // private appRef = inject(ApplicationRef);
