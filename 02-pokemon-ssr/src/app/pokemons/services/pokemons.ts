@@ -30,7 +30,7 @@ export class PokemonsService {
           return simplePokemons;
         }),
         tap(
-          pokemons => console.log('pokemons', pokemons)
+          
         ),
         finalize(() => {
           this.isLoading.set(false);
