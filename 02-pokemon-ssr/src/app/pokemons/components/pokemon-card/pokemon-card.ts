@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-pokemon-card',
   imports: [RouterLink],
   templateUrl: './pokemon-card.html',
-  styleUrl: './pokemon-card.scss'
+  styleUrl: './pokemon-card.scss',
 })
 export class PokemonCard {
   public pokemon = input.required<Pokemon>();
