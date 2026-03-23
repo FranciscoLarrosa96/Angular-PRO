@@ -41,6 +41,10 @@ export class Pokemons {
   });
 
   loadPageOnChanged = effect(() => {
+    if (this.currentPage()! < 1) {
+      this.router.navigate(['/pokemons/page/1']);
+      return;
+    }
     this.loadPokemons(this.currentPage());
   });
 
