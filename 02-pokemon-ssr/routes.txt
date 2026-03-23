@@ -18,3 +18,13 @@
 /pokemons/page/8
 /pokemons/page/9
 /pokemons/page/10
+/pokemons/bulbasaur
+/pokemons/ivysaur
+/pokemons/venusaur
+/pokemons/charmander
+/pokemons/charmeleon
+/pokemons/charizard
+/pokemons/squirtle
+/pokemons/wartortle
+/pokemons/blastoise
+/pokemons/caterpie
