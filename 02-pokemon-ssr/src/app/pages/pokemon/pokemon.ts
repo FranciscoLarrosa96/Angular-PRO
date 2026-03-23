@@ -17,7 +17,7 @@ export class Pokemon implements OnInit {
   private pokemonSvc = inject(PokemonsService);
   private title = inject(Title);
   private meta = inject(Meta);
-  idPokemon = input<string | undefined>(undefined, { alias: 'id' });
+  idPokemon = input<string | undefined>('', { alias: 'id' });
   ngOnInit(): void {
     this.pokemonSvc
       .loadPokemonById(this.idPokemon()!)
